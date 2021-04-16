@@ -1,9 +1,11 @@
 const express = require("express");
 const { randomBytes } = require("crypto");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 //since we are not using data base and using memory we will use the object to handle data encoding
 //the object name clearly show that it will contain the data of specific postID.
 const commentsByPostId = {};
