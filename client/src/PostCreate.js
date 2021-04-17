@@ -15,7 +15,6 @@ const PostCreate = () => {
     //After submitting form we need to make the input box empty
     setTitle('');
   }
-
   return (
     <div>
       <form onSubmit={onSubmit}>
