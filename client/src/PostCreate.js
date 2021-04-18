@@ -23,8 +23,7 @@ const PostCreate = () => {
           <input
             value={title}
             onChange={(e) => 
-              setTitle(e.target.value)}
-            
+              setTitle(e.target.value)}            
             className="form-control"
           />
         </div>
