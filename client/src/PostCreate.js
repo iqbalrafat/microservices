@@ -22,10 +22,13 @@ const PostCreate = () => {
           <label>Title</label>
           <input
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => 
+              setTitle(e.target.value)}
+            
             className="form-control"
           />
         </div>
+      
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>
