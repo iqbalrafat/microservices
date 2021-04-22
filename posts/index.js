@@ -2,12 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { randomBytes } = require("crypto");
 const cors = require("cors");
+const { default: axios } = require("axios");
 //we use the object to take care of data as we are not using data base.
 const posts = {};
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.post("/posts", (req, res) => {
+app.post("/posts",async (req, res) => {
   //we need to give ID our post for that we use randomBytes.
   const id = randomBytes(4).toString("hex");
   const { title } = req.body;
@@ -15,6 +16,10 @@ app.post("/posts", (req, res) => {
     id,
     title,
   };
+  await axios.post("http://localhost:4005/events", {
+  type: "PostCreated",
+  data:{id,title}
+});
   //after creating Posts we inform rest of the services that post is created so send the data
   res.status(201).send(posts[id]);
 });
