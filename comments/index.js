@@ -34,12 +34,17 @@ app.post("/posts/:id/comments", async (req, res) => {
 
   // once comments are updated send the data to other services
   res.status(201).send(comments);
- await axios.post('http://localhost:4005/events',{
-    type: 'CommentCreated',
+  await axios.post("http://localhost:4005/events", {
+    type: "CommentCreated",
     id: commentId,
     content,
-    postId: req.params.id
-  })
+    postId: req.params.id,
+  });
+});
+app.post("/events", (req, res) => {
+  console.log("Events Received", req.body.type);
+
+  res.send({});
 });
 
 app.listen(4001, () => {

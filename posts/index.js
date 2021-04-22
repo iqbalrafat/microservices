@@ -8,7 +8,7 @@ const posts = {};
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.post("/posts",async (req, res) => {
+app.post("/posts", async (req, res) => {
   //we need to give ID our post for that we use randomBytes.
   const id = randomBytes(4).toString("hex");
   const { title } = req.body;
@@ -17,9 +17,14 @@ app.post("/posts",async (req, res) => {
     title,
   };
   await axios.post("http://localhost:4005/events", {
-  type: "PostCreated",
-  data:{id,title}
-});
+    type: "PostCreated",
+    data: { id, title },
+  });
+  app.post("/events", (req, res) => {
+    console.log("Events Received", req.body.type);
+
+    res.send({});
+  });
   //after creating Posts we inform rest of the services that post is created so send the data
   res.status(201).send(posts[id]);
 });
